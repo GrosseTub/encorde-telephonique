@@ -1,0 +1,48 @@
+<div class="container" id="c1">
+    <font size = "7">Participez à la cordée téléphonique</font>
+    <div class="container" *ngIf="userss.length === 0">
+        <p>Encore aucun appel passé. Soyez le premier !</p>
+        <button routerLink="/new/restaurant" class="btn btn-outline-warning" type="button"
+            *ngIf="user.isLogon === true">Restez encordée</button>
+    </div>
+    <p *ngIf="userss.length > 0">Les restaurants déjà sélectionnés pour ce midi. Cliquez sur un bloc pour afficher
+        les personnes voulant y aller</p>
+</div>
+
+<div class="container">
+    <app-restaurants-view *ngFor="let users of userss" [userss]="userss"
+        (click)="showPersons(restaurant)" [selectedUsers]="selectedUsers">
+    </app-restaurants-view>
+</div>
+
+<br><br>
+
+<div class="container" *ngIf="restaurants.length > 0">
+    <!--<div class="container">-->
+    <div class="row">
+        <div class="col-7">
+            <h1 *ngIf="selectedRestaurant.persons.length === 0" class="float-left">Soyez le premier !
+            </h1>
+            <h1 *ngIf="selectedRestaurant.persons.length > 1" class="float-left">
+                {{selectedRestaurant.persons.length }} personnes veulent y aller
+            </h1>
+            <h1 *ngIf="selectedRestaurant.persons.length === 1" class="float-left">
+                {{selectedRestaurant.persons.length }} personne veut y aller
+            </h1>
+        </div>
+        <div class="col-4 my-auto form-inline"
+            *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
+                <div class="form-group mr-2"
+                    *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
+                    <input type="text" class="form-control" id="comment" placeholder="Je laisse un commentaire"
+                        [(ngModel)]="person.comment">
+
+                </div>
+                <button class="btn btn-outline-success" type="submit" (click)="vote()">
+                    Et j'y vais !
+                </button>
+        </div>
+    </div>
+    <app-person-view [persons]="selectedRestaurantPersons">
+    </app-person-view>
+</div>

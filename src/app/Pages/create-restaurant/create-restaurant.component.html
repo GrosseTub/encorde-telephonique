@@ -1,0 +1,85 @@
+<div class="container">
+	<h1>Proposer un restaurant</h1>
+	<p>Vous avez envie d'autre chose ? N'hésitez plus, proposez le !</p>
+
+	<br>
+
+	<div class="container" *ngIf="restaurants.length > 0">
+		<h2>Les restaurants déjà enregistrés</h2>
+		<p>Vous choisissez un restaurant déjà dans la liste, ajoutez un petit commentaire et zou !</p>
+		<div class="container">
+			<app-restaurants-view *ngFor="let restaurant of restaurants" [restaurant]="restaurant"
+				[selectedRestaurant]="selectedRestaurant" (click)="selectRestaurant(restaurant)">
+			</app-restaurants-view>
+		</div>
+		<br>
+		<div class="container">
+			<div class="form-inline">
+				<div class="form-group mr-2">
+					<input type="text" class="form-control" id="comment" placeholder="Je laisse un commentaire"
+						[(ngModel)]="person.comment">
+
+				</div>
+				<button class="btn btn-outline-success" type="submit" (click)="vote()">
+					Et j'y vais !
+				</button>
+			</div>
+		</div>
+		<br>
+	</div>
+
+	<div class="container">
+		<h2>Ajoutez un nouveau restaurant</h2>
+		<p>Personne n'y avait encore pensé, vous l'avez fait !</p>
+		<form [formGroup]="registerForm" (ngSubmit)="createRestaurant()">
+			<div class="form-group">
+				<label for="restaurantName">Nom du restaurant</label>
+				<input type="text" class="form-control" formControlName="name" aria-describedby="restaurantNameHelp"
+					[(ngModel)]="newRestaurant.name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+				<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+					<div *ngIf="f.name.errors.required">Le nom est obligatoire</div>
+				</div>
+				<small id="restaurantNameHelp" class="form-text text-muted">
+					Le nom du restaurant.
+				</small>
+			</div>
+
+			<div class="form-group">
+				<label for="restaurantType">Type</label>
+				<input type="text" class="form-control" formControlName="type" aria-describedby="restaurantTypeHelp"
+					[(ngModel)]="newRestaurant.type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+				<div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+					<div *ngIf="f.type.errors.required">Le type est obligatoire</div>
+				</div>
+				<small id="restaurantTypeHelp" class="form-text text-muted">
+					C'est le type du restaurant. Italien, chinois, indonésien. Ce genre d'informations.
+				</small>
+			</div>
+
+			<div class="form-group">
+				<label for="restaurantDescr">Description</label>
+				<input type="text" class="form-control" formControlName="description"
+					aria-describedby="restaurantDescrHelp" [(ngModel)]="newRestaurant.descr"
+					[ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+				<div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+					<div *ngIf="f.description.errors.required">La description est obligatoire</div>
+				</div>
+				<small id="restaurantDescrHelp" class="form-text text-muted">
+					Quelques mots pour donner envie au gens de venir y manger avec vous !
+				</small>
+			</div>
+
+			<div class="form-group">
+				<label for="personComment">Commentaire pour ce midi</label>
+				<input type="text" class="form-control" id="personComment" aria-describedby="personCommentHelp"
+					[(ngModel)]="person.comment">
+				<small id="personCommentHelp" class="form-text text-muted">
+					Parfois, il est bon d'avoir un plus d'informations.
+				</small>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Je vais manger là bas !</button>
+		</form>
+	</div>
+	<br>
+</div>

@@ -1,0 +1,26 @@
+ <!--<div class="card" [class.border-primary]="isSelectedBlock()">-->
+<div class="card" [class.border-primary]="isSelectedUsers()">
+  <div class="card-body">
+    <h5 class="card-title">{{ users.name }} <br>
+      <!--<span *ngIf="restaurant.id !== -1" class="badge badge-primary">{{ restaurant.persons.length }} pers </span>
+      <span *ngIf="restaurant.id === -1" class="badge badge.warning">{{ restaurant.persons.length }} pers </span>-->
+       <span class="badge badge-primary" *ngIf="users.length > 0">{{ restaurant.persons.length }} pers </span>
+      <span *ngIf="users.length === 0">&nbsp;</span>     
+	  <span class="badge badge-primary" >&nbsp;</span>
+      <svg  *ngIf="user.usersVotedId === users.id" class="bi bi-bookmark text-success" width="1em" height="1em"
+        viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M10 14l5 3V5a2 2 0 00-2-2H7a2 2 0 00-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V5a1 1 0 00-1-1H7a1 1 0 00-1 1v10.234z"
+          clip-rule="evenodd" />
+      </svg>
+    </h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ users.calledUser }}</h6>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <span class="">{{ users.comment}}</span>
+      <br>
+    </li>
+  </ul>
+</div>

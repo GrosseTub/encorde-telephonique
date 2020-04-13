@@ -1,0 +1,31 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">
+    La cordée Téléphonique
+  </a>
+  <form class="form-inline">
+<!--    <div class="form-check mb-2 mr-sm-2">-->
+      <!--<button type="button" class="btn btn-outline-warning" *ngIf="auth.isLogon === true" (click)="auth.vote(-1)">Pas-->
+<!--      <button type="button" class="btn" [class.btn-warning]="auth.restaurantVotedId === '-1'" [class.btn-outline-warning]="auth.restaurantVotedId !== '-1'" *ngIf="auth.isLogon === true" (click)="auth.vote('-1')">Pas-->
+<!--        dispo ce midi</button>-->
+<!--    </div>-->
+    <div class="form-check mb-2 mr-sm-2">
+      <button routerLink="/new/restaurant" class="btn btn-outline-primary" type="button"
+        *ngIf="auth.isLogon === true">Restons encordées !</button>
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+      <button (click)="auth.signIn()" class="btn btn-outline-success" type="button" *ngIf="auth.isLogon === false">Se
+        connecter</button>
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+      <button (click)="auth.signOut()" class="btn btn-outline-primary" type="button" *ngIf="auth.isLogon === true">Se
+        déconnecter</button>
+    </div>
+
+  </form>
+</nav>
+<br>
+<app-errors-viewer></app-errors-viewer>
+<app-messages-viewer></app-messages-viewer>
+<router-outlet>
+
+</router-outlet>
